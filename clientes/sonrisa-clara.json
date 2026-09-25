@@ -22,6 +22,8 @@
     { "dias": "Domingo", "cerrado": true }
   ],
   "urgencias": "Atendemos urgencias dentales en horario de consulta. Fuera de horario, acude a urgencias de un hospital",
+  "urgenciasCorto": "Urgencias",
+  "beneficiosDestacados": ["urgencias", "mesesSinIntereses", "aseguradoras", "odontopediatria"],
   "copyWeb": {
     "modalidad": "Atendemos con cita; si hay espacio, también sin cita."
   },

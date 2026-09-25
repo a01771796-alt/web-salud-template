@@ -164,24 +164,24 @@ function renderHeader(data, homePrefix = "") {
 </header>`;
 }
 
-function renderUrgencias(data) {
+function renderUrgenciasPill(data) {
   if (!data.urgencias) return "";
   const telHref = `tel:${data.telefono.replace(/[^+\d]/g, "")}`;
-  return `<div class="urgencias-banner">
-  <div class="container">
-    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg>
-    <span>${esc(data.urgencias)} — <a href="${telHref}">Llamar ahora</a></span>
-  </div>
-</div>`;
+  const corto = data.urgenciasCorto || "Urgencias";
+  return `<a class="urgencias-pill" href="${telHref}">
+      <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg>
+      <span>${esc(corto)} · Llamar</span>
+    </a>`;
 }
 
 function renderHero(data) {
   const citaMsg = `Hola, quiero agendar una cita en ${data.nombre}`;
   const ciudadTxt = data.direccion.ciudad ? ` en ${data.direccion.ciudad}` : "";
   return `<!-- FOTO PLACEHOLDER: reemplazar por foto real del local; esta es una foto de stock de referencia de estilo (ver CREDITOS.md) -->
-<section class="hero${data.urgencias ? " has-urgencias" : ""}" id="top">
+<section class="hero" id="top">
   <div class="hero-bg" role="img" aria-label="Ambientación de ${data.giro === "veterinaria" ? "clínica veterinaria" : "consultorio dental"}, foto de referencia"></div>
   <div class="container hero-content">
+    ${renderUrgenciasPill(data)}
     <span class="eyebrow">${esc(data.giro === "veterinaria" ? "Veterinaria" : "Consultorio dental")}${ciudadTxt}</span>
     <h1>${esc(data.nombre)}</h1>
     ${data.eslogan ? `<p class="lead">${esc(data.eslogan)}</p>` : ""}
@@ -207,7 +207,7 @@ function renderAbout(data) {
   <div class="container about-grid">
     <!-- FOTO PLACEHOLDER: reemplazar por foto real del local o del equipo; esta es una foto de stock de referencia de estilo (ver CREDITOS.md) -->
     <div class="about-card">
-      <img src="images/about.jpg" alt="Ambientación de ${data.giro === "veterinaria" ? "clínica veterinaria" : "consultorio dental"}, foto de referencia" width="800" height="1000" loading="lazy">
+      <img src="images/about.jpg" alt="Ambientación de ${data.giro === "veterinaria" ? "clínica veterinaria" : "consultorio dental"}, foto de referencia" width="800" height="600" loading="lazy">
     </div>
     <div class="about-text">
       <span class="eyebrow">Quiénes somos</span>
@@ -276,22 +276,51 @@ function renderEquipo(data) {
 </section>`;
 }
 
+const BENEFICIOS_DEFAULT_ORDER = ["urgencias", "especialistas", "odontopediatria", "mesesSinIntereses", "aseguradoras", "estacionamiento", "hospedaje"];
+
+function computeBeneficios(data) {
+  const candidates = {};
+  if (data.urgencias) candidates.urgencias = ["Urgencias", data.urgencias];
+  if (data.mesesSinIntereses) candidates.mesesSinIntereses = ["Meses sin intereses", data.mesesSinIntereses];
+  if (data.aseguradoras) candidates.aseguradoras = ["Aseguradoras", `${data.aseguradoras.join(", ")}${data.aseguradorasNota ? " — " + data.aseguradorasNota : ""}`];
+  if (data.atendemosNinos) candidates.odontopediatria = ["Odontopediatría", "Contamos con atención dental especializada para niños"];
+  if (data.estacionamiento) candidates.estacionamiento = ["Estacionamiento", data.estacionamiento];
+  const especialistas = (data.equipo || []).filter((m) => /especialista/i.test(m.rol)).map((m) => m.rol).join(", ");
+  if (especialistas) candidates.especialistas = ["Especialistas", `Contamos con ${especialistas.replace(/^./, (c) => c.toLowerCase())}`];
+  if ((data.servicios || []).some((s) => s.categoria === "Hospedaje" && s.disponible !== false)) {
+    candidates.hospedaje = ["Hospedaje", "Contamos con servicio de hospedaje/pensión"];
+  }
+  const order = (data.beneficiosDestacados && data.beneficiosDestacados.length) ? data.beneficiosDestacados : BENEFICIOS_DEFAULT_ORDER;
+  return order.filter((k) => candidates[k]).slice(0, 4).map((k) => candidates[k]);
+}
+
 function renderPorque(data) {
-  const items = [];
-  if (data.urgencias) items.push(["Urgencias", data.urgencias]);
-  if (data.pagos) items.push(["Formas de pago", data.pagos.join(", ")]);
-  if (data.mesesSinIntereses) items.push(["Meses sin intereses", data.mesesSinIntereses]);
-  if (data.aseguradoras) items.push(["Aseguradoras", `${data.aseguradoras.join(", ")}${data.aseguradorasNota ? " — " + data.aseguradorasNota : ""}`]);
-  if (data.atendemosNinos) items.push(["Odontopediatría", "Contamos con atención dental especializada para niños"]);
-  if (data.facturacion) items.push(["Facturación", data.facturacion]);
-  if (data.estacionamiento) items.push(["Estacionamiento", data.estacionamiento]);
-  if (data.politicaCancelacion) items.push(["Cancelaciones", data.politicaCancelacion]);
+  const items = computeBeneficios(data);
   if (!items.length) return "";
   return `<section id="porque-elegirnos">
   <div class="container">
     <div class="section-head">
       <span class="eyebrow">Por qué elegirnos</span>
       <h2>Lo que debes saber antes de venir</h2>
+    </div>
+    <div class="porque-grid">
+      ${items.map(([t, d]) => `<div class="porque-card"><h3>${esc(t)}</h3><p>${esc(d)}</p></div>`).join("\n      ")}
+    </div>
+  </div>
+</section>`;
+}
+
+function renderInfoPractica(data) {
+  const items = [];
+  if (data.pagos) items.push(["Formas de pago", data.pagos.join(", ")]);
+  if (data.facturacion) items.push(["Facturación", data.facturacion]);
+  if (data.politicaCancelacion) items.push(["Cancelaciones", data.politicaCancelacion]);
+  if (!items.length) return "";
+  return `<section id="info-practica">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Información práctica</span>
+      <h2>Antes de tu visita</h2>
     </div>
     <div class="porque-grid">
       ${items.map(([t, d]) => `<div class="porque-card"><h3>${esc(t)}</h3><p>${esc(d)}</p></div>`).join("\n      ")}
@@ -426,12 +455,12 @@ ${renderHead(data)}
 </head>
 <body>
 ${renderHeader(data)}
-${renderUrgencias(data)}
 ${renderHero(data)}
 ${renderAbout(data)}
 ${renderServicios(data)}
 ${renderEquipo(data)}
 ${renderPorque(data)}
+${renderInfoPractica(data)}
 ${renderFaqs(data)}
 ${renderUbicacion(data)}
 ${renderContacto(data)}

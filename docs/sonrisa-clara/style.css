@@ -141,25 +141,16 @@ a:focus-visible, button:focus-visible {
 .nav-toggle[aria-expanded="true"] span::after { transform: rotate(-45deg); top: 0; }
 
 /* ============================================================
-   Banner de urgencias
-   ============================================================ */
-.urgencias-banner {
-  background: var(--color-urgencias-bg);
-  color: var(--color-urgencias-text);
-  padding: 0.7rem var(--space-md);
-  padding-top: calc(var(--header-clearance) + 0.7rem);
-  font-size: 0.88rem;
-}
-.urgencias-banner .container { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; }
-.urgencias-banner svg { width: 18px; height: 18px; flex-shrink: 0; }
-.urgencias-banner a { font-weight: 700; text-decoration: underline; }
-
-/* ============================================================
    Hero
    ============================================================ */
-.hero { position: relative; min-height: 88vh; display: flex; align-items: center; overflow: hidden; }
-.hero.has-urgencias { padding-top: var(--space-md); }
-.hero:not(.has-urgencias) { padding-top: var(--header-clearance); }
+.hero { position: relative; min-height: 88vh; display: flex; align-items: center; overflow: hidden; padding-top: var(--header-clearance); }
+.urgencias-pill {
+  display: flex; width: fit-content; align-items: center; gap: 0.4rem;
+  background: var(--color-urgencias-bg); color: var(--color-urgencias-text);
+  padding: 0.35rem 0.8rem; border-radius: 999px; font-size: 0.82rem; font-weight: 700;
+  margin-bottom: var(--space-sm); text-decoration: none;
+}
+.urgencias-pill svg { width: 15px; height: 15px; flex-shrink: 0; }
 .hero-bg { position: absolute; inset: 0; background: var(--hero-image) center 45% / cover no-repeat; }
 .hero-bg::after { content: ""; position: absolute; inset: 0; background: var(--hero-overlay); }
 .hero-content { position: relative; z-index: 2; max-width: 640px; color: var(--color-hero-text); }
@@ -182,8 +173,9 @@ a:focus-visible, button:focus-visible {
    Sobre nosotros
    ============================================================ */
 .about { background: var(--color-panel); }
-.about-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: var(--space-xl); align-items: center; }
-.about-card img { border-radius: var(--radius-lg); width: 100%; aspect-ratio: 4/5; object-fit: cover; box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
+.about-grid { display: grid; grid-template-columns: 0.7fr 1.3fr; gap: var(--space-xl); align-items: center; }
+.about-card { max-width: 340px; }
+.about-card img { border-radius: var(--radius-lg); width: 100%; height: auto; aspect-ratio: 4/3; object-fit: cover; box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
 .about-text h2 { font-size: clamp(1.9rem, 3.2vw, 2.6rem); }
 .about-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: var(--space-sm); margin-top: var(--space-md); }
 .about-fact { background: var(--color-white); border-radius: var(--radius); padding: var(--space-sm); text-align: center; border: 1px solid var(--color-border); }
@@ -325,7 +317,7 @@ a:focus-visible, button:focus-visible {
    ============================================================ */
 @media (max-width: 900px) {
   .about-grid { grid-template-columns: 1fr; }
-  .about-card img { aspect-ratio: 16/9; }
+  .about-card { max-width: 280px; margin: 0 auto; }
   .location-grid { grid-template-columns: 1fr; }
   .contact-grid { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr; gap: var(--space-md); }

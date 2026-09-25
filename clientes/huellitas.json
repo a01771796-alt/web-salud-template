@@ -22,6 +22,8 @@
     { "dias": "Domingo", "cerrado": true }
   ],
   "urgencias": "Atendemos urgencias 24 h",
+  "urgenciasCorto": "Urgencias 24 h",
+  "beneficiosDestacados": ["urgencias", "hospedaje", "estacionamiento", "especialistas"],
   "copyWeb": {
     "modalidad": "Atendemos con cita; si hay espacio, también sin cita."
   },
