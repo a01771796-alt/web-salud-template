@@ -1,0 +1,49 @@
+/* Preset "veterinaria-calida" — cálido, amigable, formas redondeadas.
+   Pensado para veterinarias/pet shops: terracota + verde salvia,
+   tipografía redondeada (Baloo 2 display + Nunito body), radios grandes. */
+:root {
+  --color-bg: #fdf8f2;
+  --color-panel: #f6ead9;
+  --color-panel-alt: #3d2b1f;
+  --color-panel-alt-text-soft: #e3d3c4;
+  --color-footer: #2c2018;
+  --color-footer-text: #cbb9a8;
+  --color-footer-text-soft: #96826f;
+  --color-border: #ecdcc6;
+  --color-heading: #3d2b1f;
+  --color-text: #52402f;
+  --color-text-soft: #7d6a58;
+  --color-white: #ffffff;
+
+  --color-primary: #8f4a1b;
+  --color-primary-dark: #6e380f;
+  --color-accent-2: #6f9c5c;
+
+  --color-header-bg: rgba(61, 43, 31, 0.9);
+  --color-header-bg-solid: rgba(44, 32, 24, 0.97);
+  --color-header-border: rgba(255,255,255,0.1);
+  --color-header-text: #f8ede0;
+
+  --hero-image: url("images/hero.jpg");
+  --hero-overlay: linear-gradient(180deg, rgba(61,38,20,0.55) 0%, rgba(40,24,12,0.82) 100%);
+  --color-hero-text: #fff8f0;
+  --color-hero-text-soft: #f0ddc8;
+
+  --color-urgencias-bg: #6e380f;
+  --color-urgencias-text: #ffffff;
+
+  --font-display: "Baloo 2", "Quicksand", sans-serif;
+  --font-body: "Nunito", system-ui, sans-serif;
+
+  --radius: 16px;
+  --radius-lg: 28px;
+  --radius-pill: 999px;
+}
+
+/* Jugada firma: recorte orgánico tipo "hueso de galleta" en las tarjetas
+   de servicio/equipo — remata el tono cálido sin depender de fotos. */
+.equipo-card, .porque-card, .about-fact, .faq-item, .location-card {
+  border-radius: var(--radius-lg) var(--radius) var(--radius-lg) var(--radius);
+}
+.equipo-avatar { border-radius: 40% 60% 60% 40% / 50% 40% 60% 50%; }
+.hero-content h1 { letter-spacing: -0.01em; }

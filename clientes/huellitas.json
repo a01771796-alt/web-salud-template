@@ -1,0 +1,69 @@
+{
+  "demo": true,
+  "nombre": "Clínica Veterinaria Huellitas",
+  "giro": "veterinaria",
+  "estilo": "veterinaria-calida",
+  "eslogan": "Cuidado cercano para tu mejor amigo",
+  "telefono": "+52 55 1234 5678",
+  "whatsapp": "525512345678",
+  "urlBase": "https://a01771796-alt.github.io/web-salud-template/huellitas/",
+  "direccion": {
+    "calle": "Av. Universidad 230, colonia Del Valle",
+    "referencia": "a 3 cuadras del metro Zapata",
+    "ciudad": "Ciudad de México",
+    "estado": "Ciudad de México",
+    "cp": "03100"
+  },
+  "lat": 19.3805,
+  "lng": -99.1636,
+  "horario": [
+    { "dias": "Lunes a viernes", "diasSchema": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "abre": "09:00", "cierra": "19:00" },
+    { "dias": "Sábado", "diasSchema": ["Saturday"], "abre": "09:00", "cierra": "15:00" },
+    { "dias": "Domingo", "cerrado": true }
+  ],
+  "urgencias": "Atendemos urgencias 24 h — llama directo al 55-1234-5678",
+  "modalidad": "Con cita previa (también se aceptan clientes por orden de llegada si hay espacio disponible, pero no se garantiza)",
+  "confirmacionCitas": "Las citas solicitadas por WhatsApp quedan pendientes de que un encargado confirme la disponibilidad final por este mismo medio — no son automáticas",
+  "estacionamiento": "Sí, 3 lugares propios frente al local",
+  "pagos": ["Efectivo", "Tarjeta de crédito/débito", "Transferencia"],
+  "especies": ["Perros", "Gatos"],
+  "especiesNota": "Exóticos solo previa consulta telefónica, no se agendan por WhatsApp",
+  "promociones": "Miércoles, 10% de descuento en baño y corte de pelo",
+  "otrosServicios": [
+    "Hospedaje/pensión para perros y gatos",
+    "Venta de alimento (dos marcas) y accesorios básicos (correas, arneses, casitas)"
+  ],
+  "politicaCancelacion": "Avisar con al menos 2 horas de anticipación",
+  "requisitos": [
+    "Estética: la mascota debe tener sus vacunas al corriente",
+    "Cirugía: ayuno de 8-12 horas antes del procedimiento, indicado por el médico al agendar"
+  ],
+  "servicios": [
+    { "nombre": "Consulta general", "categoria": "Consulta", "precio": "$350", "duracion": "30 min", "disponible": true },
+    { "nombre": "Vacuna múltiple (perro/gato)", "categoria": "Vacunación", "precio": "$450", "duracion": "20 min", "disponible": true },
+    { "nombre": "Vacuna antirrábica", "categoria": "Vacunación", "precio": "$250", "duracion": "15 min", "disponible": true },
+    { "nombre": "Desparasitación", "categoria": "Desparasitación", "precio": "$200", "duracion": "15 min", "disponible": true },
+    { "nombre": "Baño perro chico", "categoria": "Estética", "precio": "$250", "duracion": "45 min", "disponible": true },
+    { "nombre": "Baño perro mediano", "categoria": "Estética", "precio": "$320", "duracion": "60 min", "disponible": true },
+    { "nombre": "Baño perro grande", "categoria": "Estética", "precio": "$420", "duracion": "75 min", "disponible": true },
+    { "nombre": "Corte de pelo", "categoria": "Estética", "precio": "desde $280", "duracion": "60 min", "disponible": true },
+    { "nombre": "Esterilización (macho/hembra)", "categoria": "Cirugía", "precio": "desde $1,800", "duracion": "Variable, se confirma en valoración", "disponible": true },
+    { "nombre": "Limpieza dental con anestesia", "categoria": "Cirugía", "precio": "desde $2,200", "duracion": "Variable, se confirma en valoración", "disponible": true },
+    { "nombre": "Hospedaje por noche", "categoria": "Hospedaje", "precio": "$200", "duracion": "—", "disponible": true },
+    { "nombre": "Perfil sanguíneo básico", "categoria": "Laboratorio", "precio": "$600", "duracion": "Resultados en 24 h", "disponible": false, "notaNoDisponible": "Por el momento sin insumo, disponible desde el próximo mes" }
+  ],
+  "equipo": [
+    { "iniciales": "MV", "rol": "Médica veterinaria general" },
+    { "iniciales": "CV", "rol": "Veterinario, especialista en cirugía" },
+    { "iniciales": "EG", "rol": "Estilista canino/felino" }
+  ],
+  "faqs": [
+    { "pregunta": "¿Necesito cita previa?", "respuesta": "Se recomienda agendar cita, aunque también aceptamos clientes por orden de llegada si hay espacio disponible (sin garantía de horario)." },
+    { "pregunta": "¿Confirman mi cita de inmediato?", "respuesta": "No es automático: las citas solicitadas por WhatsApp quedan pendientes de que un encargado confirme la disponibilidad final por el mismo medio." },
+    { "pregunta": "¿Atienden mascotas exóticas?", "respuesta": "Solo previa consulta telefónica — los exóticos no se agendan directamente por WhatsApp." },
+    { "pregunta": "¿Qué necesito para el servicio de estética?", "respuesta": "La mascota debe tener sus vacunas al corriente." },
+    { "pregunta": "¿Tienen servicio de urgencias?", "respuesta": "Sí, atendemos urgencias 24 horas — llama directo al 55-1234-5678." }
+  ],
+  "redes": {},
+  "avisoPrivacidadContacto": "privacidad@huellitas-demo.mx"
+}

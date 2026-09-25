@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://a01771796-alt.github.io/web-salud-template/sonrisa-clara/sitemap.xml

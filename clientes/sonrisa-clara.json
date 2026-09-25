@@ -1,0 +1,66 @@
+{
+  "demo": true,
+  "nombre": "Consultorio Dental Sonrisa Clara",
+  "giro": "dentista",
+  "estilo": "dental-clinico",
+  "eslogan": "Salud dental para toda la familia",
+  "telefono": "+52 55 1234 5678",
+  "whatsapp": "525512345678",
+  "urlBase": "https://a01771796-alt.github.io/web-salud-template/sonrisa-clara/",
+  "direccion": {
+    "calle": "Av. Universidad 230, colonia Del Valle",
+    "referencia": "a 3 cuadras del metro Zapata",
+    "ciudad": "Ciudad de México",
+    "estado": "Ciudad de México",
+    "cp": "03100"
+  },
+  "lat": 19.3805,
+  "lng": -99.1636,
+  "horario": [
+    { "dias": "Lunes a viernes", "diasSchema": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "abre": "09:00", "cierra": "19:00" },
+    { "dias": "Sábado", "diasSchema": ["Saturday"], "abre": "09:00", "cierra": "14:00" },
+    { "dias": "Domingo", "cerrado": true }
+  ],
+  "urgencias": "Atendemos urgencias dentales en horario de consulta — llama directo al 55-1234-5678. Fuera de horario, acude a urgencias de un hospital",
+  "modalidad": "Con cita previa (también se aceptan clientes por orden de llegada si hay espacio disponible, pero no se garantiza)",
+  "confirmacionCitas": "Las citas solicitadas por WhatsApp quedan pendientes de que un encargado confirme la disponibilidad final por este mismo medio — no son automáticas",
+  "estacionamiento": "Sí, 3 lugares propios frente al local",
+  "pagos": ["Efectivo", "Tarjeta de crédito/débito", "Transferencia"],
+  "mesesSinIntereses": "3, 6 y 12 MSI con tarjetas participantes en tratamientos desde $5,000",
+  "aseguradoras": ["GNP", "Metlife", "AXA"],
+  "aseguradorasNota": "Reembolso, no pago directo",
+  "atendemosNinos": true,
+  "facturacion": "Sí, pide tu factura el mismo día de tu pago",
+  "valoracionNota": "La primera cita siempre es una valoración; su costo se abona al tratamiento si decides continuar",
+  "promociones": "Miércoles, 10% de descuento en limpieza dental",
+  "politicaCancelacion": "Avisar con al menos 2 horas de anticipación",
+  "servicios": [
+    { "nombre": "Valoración", "categoria": "Valoración", "precio": "$300", "duracion": "30 min", "disponible": true },
+    { "nombre": "Limpieza dental", "categoria": "Preventiva", "precio": "$600", "duracion": "45 min", "disponible": true },
+    { "nombre": "Resina (por diente)", "categoria": "Restauración", "precio": "desde $800", "duracion": "45 min", "disponible": true },
+    { "nombre": "Extracción simple", "categoria": "Cirugía", "precio": "desde $900", "duracion": "30 min", "disponible": true },
+    { "nombre": "Endodoncia (por conducto)", "categoria": "Endodoncia", "precio": "desde $2,500", "duracion": "Variable, se confirma en valoración", "disponible": true },
+    { "nombre": "Corona", "categoria": "Prótesis", "precio": "desde $4,500", "duracion": "Variable, se confirma en valoración", "disponible": true },
+    { "nombre": "Blanqueamiento dental", "categoria": "Estética", "precio": "$3,200", "duracion": "60 min", "disponible": true },
+    { "nombre": "Ortodoncia (brackets)", "categoria": "Ortodoncia", "precio": "Presupuesto en valoración", "duracion": "Variable", "disponible": true },
+    { "nombre": "Implante dental", "categoria": "Prótesis", "precio": "Presupuesto en valoración", "duracion": "Variable", "disponible": true },
+    { "nombre": "Extracción de muelas del juicio", "categoria": "Cirugía", "precio": "Presupuesto en valoración", "duracion": "Variable", "disponible": true },
+    { "nombre": "Consulta odontopediatría", "categoria": "Odontopediatría", "precio": "$400", "duracion": "30 min", "disponible": true },
+    { "nombre": "Carillas de porcelana", "categoria": "Estética", "precio": "Presupuesto en valoración", "duracion": "Variable", "disponible": false, "notaNoDisponible": "Por el momento sin proveedor, disponible desde el próximo mes" }
+  ],
+  "equipo": [
+    { "iniciales": "DG", "rol": "Odontóloga general" },
+    { "iniciales": "OR", "rol": "Especialista en ortodoncia" },
+    { "iniciales": "OP", "rol": "Odontopediatra" }
+  ],
+  "faqs": [
+    { "pregunta": "¿La primera cita tiene costo?", "respuesta": "Sí, la primera cita siempre es una valoración ($300); su costo se abona al tratamiento si decides continuar." },
+    { "pregunta": "¿Aceptan seguro dental?", "respuesta": "Trabajamos con GNP, Metlife y AXA por reembolso (no pago directo)." },
+    { "pregunta": "¿Tienen meses sin intereses?", "respuesta": "Sí, 3, 6 y 12 MSI con tarjetas participantes en tratamientos desde $5,000." },
+    { "pregunta": "¿Atienden niños?", "respuesta": "Sí, contamos con odontopediatría." },
+    { "pregunta": "¿Dan factura?", "respuesta": "Sí, pide tu factura el mismo día de tu pago." },
+    { "pregunta": "¿Qué hago si tengo una urgencia dental fuera de horario?", "respuesta": "Acude a urgencias de un hospital; en horario de consulta llámanos directo al 55-1234-5678." }
+  ],
+  "redes": {},
+  "avisoPrivacidadContacto": "privacidad@sonrisaclara-demo.mx"
+}
