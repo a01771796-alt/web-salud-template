@@ -171,6 +171,12 @@ a:focus-visible, button:focus-visible {
 .hero-meta svg { width: 16px; height: 16px; color: var(--color-accent-2); }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 1rem; }
 .hero-actions .btn-outline { border-color: #fff; color: #fff; }
+.demo-tag {
+  display: inline-block; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.02em;
+  padding: 0.3rem 0.7rem; border-radius: 999px;
+  background: rgba(255,255,255,0.14); color: var(--color-hero-text-soft); margin-bottom: var(--space-sm);
+}
+.footer-bottom .demo-tag { background: rgba(255,255,255,0.1); color: var(--color-footer-text-soft); margin-bottom: 0; }
 
 /* ============================================================
    Sobre nosotros
@@ -219,8 +225,8 @@ a:focus-visible, button:focus-visible {
   display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 1.3rem;
   margin: 0 auto var(--space-sm);
 }
-.equipo-card h3 { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--color-text-soft); margin: 0; font-family: var(--font-body); font-weight: 600; }
-.equipo-card p { margin: 0; color: var(--color-heading); font-weight: 600; font-size: 0.95rem; }
+.equipo-card h3 { margin: 0; color: var(--color-heading); font-weight: 600; font-size: 0.95rem; }
+.equipo-card p { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--color-text-soft); margin: 0.2rem 0 0; font-family: var(--font-body); font-weight: 600; }
 
 /* ============================================================
    Por qué elegirnos

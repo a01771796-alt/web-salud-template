@@ -185,7 +185,7 @@ function renderHero(data) {
     <span class="eyebrow">${esc(data.giro === "veterinaria" ? "Veterinaria" : "Consultorio dental")}${ciudadTxt}</span>
     <h1>${esc(data.nombre)}</h1>
     ${data.eslogan ? `<p class="lead">${esc(data.eslogan)}</p>` : ""}
-    ${data.demo ? `<p class="lead"><strong>NEGOCIO DE PRUEBA</strong> — datos ficticios, usado solo para probar esta plantilla.</p>` : ""}
+    ${data.demo ? `<span class="demo-tag">Sitio de ejemplo · datos ficticios</span>` : ""}
     <div class="hero-actions">
       <a class="btn btn-primary" href="${waLink(data.whatsapp, citaMsg)}" target="_blank" rel="noopener">
         <svg aria-hidden="true" viewBox="0 0 32 32" fill="currentColor"><path d="M16 3C9 3 3.3 8.7 3.3 15.7c0 2.5.7 4.8 1.9 6.8L3 29l6.7-2.1c1.9 1 4 1.6 6.3 1.6 7 0 12.7-5.7 12.7-12.7C28.7 8.7 23 3 16 3zm0 23c-2 0-3.9-.5-5.6-1.5l-.4-.2-4 1.2 1.2-3.9-.3-.4C5.8 19.6 5 17.7 5 15.7 5 9.7 9.9 4.8 16 4.8s11 4.9 11 10.9S22.1 26 16 26z"/></svg>
@@ -199,10 +199,8 @@ function renderHero(data) {
 
 function renderAbout(data) {
   const facts = [];
-  if (data.giro === "veterinaria" && data.especies) facts.push([data.especies.length, "Especies que atendemos"]);
-  if (data.giro === "dentista" && data.atendemosNinos) facts.push(["Sí", "Atendemos niños"]);
   const diasAbiertos = data.horario.filter((h) => !h.cerrado).reduce((n, h) => n + (h.diasSchema ? h.diasSchema.length : 1), 0);
-  facts.push([diasAbiertos, "Días a la semana abierto"]);
+  if (diasAbiertos > 0) facts.push([diasAbiertos, "Días a la semana abierto"]);
   if (data.giro === "dentista" && data.aseguradoras) facts.push([data.aseguradoras.length, "Aseguradoras aceptadas"]);
 
   return `<section class="about" id="nosotros">
@@ -214,36 +212,38 @@ function renderAbout(data) {
     <div class="about-text">
       <span class="eyebrow">Quiénes somos</span>
       <h2>${data.giro === "veterinaria" ? "Cuidado cercano, paso a paso" : "Tu sonrisa, en manos de confianza"}</h2>
-      <p>${esc(data.nombre)} atiende ${data.direccion.ciudad ? "en " + esc(data.direccion.ciudad) : ""}${data.direccion.referencia ? ", " + esc(data.direccion.referencia) : ""}. ${esc(data.modalidad || "")}</p>
+      <p>${esc(data.nombre)} atiende ${data.direccion.ciudad ? "en " + esc(data.direccion.ciudad) : ""}${data.direccion.referencia ? ", " + esc(data.direccion.referencia) : ""}. ${esc(data.copyWeb && data.copyWeb.modalidad || "")}</p>
       ${data.valoracionNota ? `<p>${esc(data.valoracionNota)}</p>` : ""}
-      ${data.especiesNota ? `<p>${esc(data.especiesNota)}</p>` : ""}
       <!-- PENDIENTE: confirmar año de apertura, historia y tamaño real del equipo -->
-      <div class="about-facts">
+      ${facts.length ? `<div class="about-facts">
         ${facts.slice(0, 3).map(([n, l]) => `<div class="about-fact"><strong>${esc(n)}</strong><span>${esc(l)}</span></div>`).join("\n        ")}
-      </div>
+      </div>` : ""}
     </div>
   </div>
 </section>`;
 }
 
 function renderServicios(data) {
+  const ocultarNoDisponibles = data.serviciosNoDisponibles === "ocultar";
   const groups = groupBy(data.servicios, "categoria");
-  const categorias = [...groups.entries()].map(([cat, items]) => {
+  const categorias = [...groups.entries()].map(([cat, itemsAll]) => {
+    const items = ocultarNoDisponibles ? itemsAll.filter((s) => s.disponible !== false) : itemsAll;
+    if (!items.length) return "";
     const rows = items.map((s) => `      <div class="servicio-row${s.disponible === false ? " no-disponible" : ""}">
         <div class="servicio-info">
           <span class="servicio-nombre">${esc(s.nombre)}</span>
-          ${s.duracion ? `<span class="servicio-duracion">${esc(s.duracion)}</span>` : ""}
-          ${s.disponible === false ? `<span class="servicio-nota-disp">${esc(s.notaNoDisponible || "No disponible por el momento")}</span>` : ""}
+          ${s.duracion && s.duracion !== "—" ? `<span class="servicio-duracion">${esc(s.duracion)}</span>` : ""}
+          ${s.disponible === false ? `<span class="servicio-nota-disp">Próximamente</span>` : ""}
         </div>
         <span class="servicio-precio">${esc(s.precio)}</span>
       </div>`).join("\n");
-    const catMsg = `Hola, quisiera más información sobre ${cat.toLowerCase()}`;
+    const catMsg = `Hola, quisiera más información sobre servicios de ${cat.toLowerCase()}`;
     return `    <div class="servicios-categoria">
       <h3>${esc(cat)}</h3>
 ${rows}
       <p class="services-note"><a href="${waLink(data.whatsapp, catMsg)}" target="_blank" rel="noopener">Pregunta por WhatsApp →</a></p>
     </div>`;
-  }).join("\n");
+  }).filter(Boolean).join("\n");
 
   return `<section id="servicios">
   <div class="container">
@@ -268,8 +268,8 @@ function renderEquipo(data) {
     <div class="equipo-grid">
       ${data.equipo.map((m) => `<div class="equipo-card">
         <div class="equipo-avatar">${esc(m.iniciales)}</div>
-        <h3>Equipo</h3>
-        <p>${esc(m.rol)}</p>
+        <h3>${esc(m.nombre || m.rol)}</h3>
+        ${m.nombre ? `<p>${esc(m.rol)}</p>` : ""}
       </div>`).join("\n      ")}
     </div>
   </div>
@@ -278,10 +278,11 @@ function renderEquipo(data) {
 
 function renderPorque(data) {
   const items = [];
-  if (data.confirmacionCitas) items.push(["Confirmación real", data.confirmacionCitas]);
+  if (data.urgencias) items.push(["Urgencias", data.urgencias]);
   if (data.pagos) items.push(["Formas de pago", data.pagos.join(", ")]);
   if (data.mesesSinIntereses) items.push(["Meses sin intereses", data.mesesSinIntereses]);
   if (data.aseguradoras) items.push(["Aseguradoras", `${data.aseguradoras.join(", ")}${data.aseguradorasNota ? " — " + data.aseguradorasNota : ""}`]);
+  if (data.atendemosNinos) items.push(["Odontopediatría", "Contamos con atención dental especializada para niños"]);
   if (data.facturacion) items.push(["Facturación", data.facturacion]);
   if (data.estacionamiento) items.push(["Estacionamiento", data.estacionamiento]);
   if (data.politicaCancelacion) items.push(["Cancelaciones", data.politicaCancelacion]);
@@ -332,7 +333,6 @@ function renderUbicacion(data) {
         <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s7-7.3 7-12a7 7 0 1 0-14 0c0 4.7 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>
         <h3>Dirección</h3>
         <p>${esc(direccionTxt)}</p>
-        ${data.estacionamiento ? `<p>${esc(data.estacionamiento)}</p>` : ""}
       </div>
       <div class="location-card">
         <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
@@ -360,7 +360,7 @@ function renderContacto(data) {
     <div>
       <span class="eyebrow">Hablemos</span>
       <h2>Agenda tu cita</h2>
-      <p class="lead">La forma más rápida de agendar es por WhatsApp — te confirmamos disponibilidad el mismo día.</p>
+      <p class="lead">La forma más rápida de agendar es por WhatsApp.</p>
       <div class="contact-list">
         <div class="contact-item">
           <svg aria-hidden="true" viewBox="0 0 32 32" fill="currentColor"><path d="M16 3C9 3 3.3 8.7 3.3 15.7c0 2.5.7 4.8 1.9 6.8L3 29l6.7-2.1c1.9 1 4 1.6 6.3 1.6 7 0 12.7-5.7 12.7-12.7C28.7 8.7 23 3 16 3z"/></svg>
@@ -383,7 +383,7 @@ function renderContacto(data) {
 
 function renderFooter(data, homePrefix = "") {
   const demoLine = data.demo
-    ? `<!-- PENDIENTE: dominio final antes de entregar --> ${esc(data.nombre)} — NEGOCIO DE PRUEBA, datos ficticios. Sitio de muestra (demo) para probar esta plantilla, no es el sitio oficial de ningún negocio real.`
+    ? `<!-- PENDIENTE: dominio final antes de entregar --> ${esc(data.nombre)} — <span class="demo-tag">Sitio de ejemplo · datos ficticios</span>`
     : `© ${new Date().getFullYear()} ${esc(data.nombre)}. <a href="aviso-de-privacidad.html">Aviso de privacidad</a>.`;
   return `<footer class="site-footer">
   <div class="container footer-grid">
