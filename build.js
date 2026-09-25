@@ -140,21 +140,21 @@ ${horarioSpec}
 </script>`;
 }
 
-function renderHeader(data) {
+function renderHeader(data, homePrefix = "") {
   const initials = data.nombre.split(" ").filter((w) => w[0] === w[0].toUpperCase()).slice(0, 2).map((w) => w[0]).join("") || data.nombre.slice(0, 2).toUpperCase();
   const citaMsg = `Hola, quiero agendar una cita en ${data.nombre}`;
   return `<header class="site-header">
   <div class="header-inner">
-    <a href="#top" class="brand">
+    <a href="${homePrefix}#top" class="brand">
       <span class="brand-badge" aria-hidden="true">${esc(initials)}</span>
       <span class="brand-name">${esc(data.nombre.split(" ")[0])}<small>${esc(data.nombre.split(" ").slice(1).join(" "))}</small></span>
     </a>
     <nav class="main-nav" id="main-nav">
-      <a href="#top">Inicio</a>
-      <a href="#servicios">Servicios</a>
-      <a href="#nosotros">Nosotros</a>
-      <a href="#faq">Preguntas</a>
-      <a href="#ubicacion">Ubicación</a>
+      <a href="${homePrefix}#top">Inicio</a>
+      <a href="${homePrefix}#servicios">Servicios</a>
+      <a href="${homePrefix}#nosotros">Nosotros</a>
+      <a href="${homePrefix}#faq">Preguntas</a>
+      <a href="${homePrefix}#ubicacion">Ubicación</a>
     </nav>
     <div class="header-actions">
       <a class="btn btn-primary" href="${waLink(data.whatsapp, citaMsg)}" target="_blank" rel="noopener">Agenda tu cita</a>
@@ -381,7 +381,7 @@ function renderContacto(data) {
 </section>`;
 }
 
-function renderFooter(data) {
+function renderFooter(data, homePrefix = "") {
   const demoLine = data.demo
     ? `<!-- PENDIENTE: dominio final antes de entregar --> ${esc(data.nombre)} — NEGOCIO DE PRUEBA, datos ficticios. Sitio de muestra (demo) para probar esta plantilla, no es el sitio oficial de ningún negocio real.`
     : `© ${new Date().getFullYear()} ${esc(data.nombre)}. <a href="aviso-de-privacidad.html">Aviso de privacidad</a>.`;
@@ -394,9 +394,9 @@ function renderFooter(data) {
     <div class="footer-col">
       <h4>Explora</h4>
       <ul>
-        <li><a href="#top">Inicio</a></li>
-        <li><a href="#servicios">Servicios</a></li>
-        <li><a href="#ubicacion">Ubicación</a></li>
+        <li><a href="${homePrefix}#top">Inicio</a></li>
+        <li><a href="${homePrefix}#servicios">Servicios</a></li>
+        <li><a href="${homePrefix}#ubicacion">Ubicación</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -465,7 +465,7 @@ function renderAvisoPrivacidad(data) {
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-${renderHeader(data)}
+${renderHeader(data, "index.html")}
 <section class="legal">
   <div class="container">
     <h1>Aviso de privacidad</h1>
@@ -473,7 +473,7 @@ ${renderHeader(data)}
     ${apartados.map(([t, d]) => `<h2>${esc(t)}</h2>\n    <p>${esc(d)}</p>\n    <span class="pendiente">PENDIENTE: revisar con asesor legal</span>`).join("\n    ")}
   </div>
 </section>
-${renderFooter(data)}
+${renderFooter(data, "index.html")}
 ${renderWhatsappFloat(data)}
 <script src="script.js"></script>
 </body>
