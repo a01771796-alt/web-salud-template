@@ -287,8 +287,10 @@ a:focus-visible, button:focus-visible {
 .footer-col ul { display: grid; gap: 0.5rem; }
 .footer-col a { font-size: 0.9rem; color: var(--color-footer-text); transition: color var(--transition); }
 .footer-col a:hover { color: var(--color-accent-2); }
-.footer-bottom { margin-top: var(--space-lg); padding-top: var(--space-md); border-top: 1px solid rgba(255,255,255,0.1); text-align: center; font-size: 0.8rem; color: var(--color-footer-text-soft); }
+.footer-bottom { margin-top: var(--space-lg); padding-top: var(--space-md); padding-bottom: calc(58px + 1.5rem + 1rem); /* deja el crédito por encima del botón flotante de WhatsApp */ border-top: 1px solid rgba(255,255,255,0.1); text-align: center; font-size: 0.8rem; color: var(--color-footer-text-soft); }
 .footer-bottom a { text-decoration: underline; }
+/* Crédito de Nucleo: obligatorio en todo sitio (demo o vendido); solo se quita si Luis lo indica para ese cliente. */
+.footer-credito { margin-top: 0.4rem; }
 
 /* ============================================================
    WhatsApp flotante
