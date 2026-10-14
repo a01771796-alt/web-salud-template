@@ -61,6 +61,9 @@ Solo dentista: `aseguradoras`, `aseguradorasNota`, `mesesSinIntereses`, `atendem
 
 HTML/CSS/JS plano, sin build tools ni backend. Pensado para **GitHub Pages** sirviendo desde `docs/` (cada cliente en su propia subcarpeta) — también funciona en Cloudflare Pages/Workers si se prefiere.
 
+## Crédito de Nucleo (regla permanente)
+Todo sitio de Nucleo (demo o vendido) lleva en el pie el crédito "Página hecha por Nucleo" con enlace a https://nucleoia.com.mx, sin que lo tape el botón de WhatsApp en celular. Solo se quita si Luis lo indica para ese cliente. `build.js` ya lo genera (`.footer-credito` en `renderFooter`) y `templates/base.css` deja `padding-bottom` en `.footer-bottom` para librar el botón flotante.
+
 ## Aviso de privacidad
 
 `build.js` genera `aviso-de-privacidad.html` para cada cliente con una plantilla genérica y `PENDIENTE: revisar con asesor legal` visible en cada apartado — no es contenido legal definitivo, hay que revisarlo con un asesor antes de publicar como sitio real (no demo).

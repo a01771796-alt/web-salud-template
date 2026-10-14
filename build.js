@@ -436,7 +436,9 @@ function renderFooter(data, homePrefix = "") {
       </ul>
     </div>
   </div>
-  <div class="footer-bottom">${demoLine}</div>
+  <div class="footer-bottom">${demoLine}
+    <p class="footer-credito">Página hecha por <a href="https://nucleoia.com.mx" target="_blank" rel="noopener">Nucleo</a></p>
+  </div>
 </footer>`;
 }
 
