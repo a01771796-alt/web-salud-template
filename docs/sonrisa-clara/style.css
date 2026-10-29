@@ -291,6 +291,7 @@ a:focus-visible, button:focus-visible {
 .footer-bottom a { text-decoration: underline; }
 /* Crédito de Nucleo: obligatorio en todo sitio (demo o vendido); solo se quita si Luis lo indica para ese cliente. */
 .footer-credito { margin-top: 0.4rem; }
+.footer-credito a { color: var(--color-footer-text); } /* más claro que el texto suave del pie: pasa contraste AA */
 
 /* ============================================================
    WhatsApp flotante
